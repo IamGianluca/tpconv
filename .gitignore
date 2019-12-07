@@ -1,0 +1,14 @@
+# python virtual environment
+.python-version
+
+# type checking
+.pytype
+
+# IDE
+.vim
+
+# cache
+__pycache__
+
+# project's metadata
+*.egg-info/
