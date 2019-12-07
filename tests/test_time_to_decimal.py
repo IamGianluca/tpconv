@@ -2,18 +2,22 @@ from datetime import timedelta
 
 import pytest
 
+from tpconv.converter import CompletionCalculator
+
 
 @pytest.mark.parametrize(
-    "time,expected",
+    "goal,completed,expected",
     [
-        (timedelta(minutes=59), 59),
-        (timedelta(hours=1), 60),
-        (timedelta(hours=1, minutes=1), 61),
+        (timedelta(minutes=59), timedelta(minutes=0), 0.0),
+        (timedelta(hours=10), timedelta(hours=1), 10.0),
+        (timedelta(hours=1), timedelta(minutes=60), 100.0),
+        (timedelta(hours=1, minutes=1), timedelta(hours=1), 98.36),
         (
             timedelta(hours=1, minutes=6, seconds=14),
-            66,
-        ),  # don't consider seconds
+            timedelta(hours=1, minutes=6, seconds=0),
+            99.65,
+        ),
     ],
 )
-def test_time_to_minutes(time, expected):
-    assert round(time.seconds / 60) == expected
+def test_time_to_minutes(goal, completed, expected):
+    assert CompletionCalculator(goal).completed(completed) == expected
