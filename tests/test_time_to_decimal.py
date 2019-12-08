@@ -1,5 +1,6 @@
-import pytest
 from datetime import timedelta
+
+import pytest
 
 
 @pytest.mark.parametrize(
@@ -16,4 +17,3 @@ from datetime import timedelta
 )
 def test_time_to_minutes(time, expected):
     assert round(time.seconds / 60) == expected
-
