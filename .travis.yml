@@ -6,8 +6,7 @@ before_install:
     - pip install poetry
     - poetry --version
 install:
-    - make build
+    - poetry install
 script:
-    - poetry run black -l 79 . --check
-    - poetry run make pep8_checks
+    - poetry run make format_checks
     - poetry run make test

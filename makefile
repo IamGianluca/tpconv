@@ -1,13 +1,12 @@
-build:
-	poetry install
+format:
+	isort -rc -y && \
+	black -l 79 .
 
 test:
 	pytype tpconv && \
 	pytest -s --cov tpconv
 
-pep8_checks:
+format_checks:
+	black -l 79 . --check && \
 	flake8 --no-isort-config
 
-format:
-	isort -rc -y && \
-	black -l 79 .
